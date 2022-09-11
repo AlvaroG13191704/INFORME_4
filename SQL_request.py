@@ -16,9 +16,7 @@ def get_users():
         cursor.execute('SELECT * FROM usuarios;') # hacemos el request
         users = cursor.fetchall() # retorna un objeto
     db.close()
-    print(users) 
     return users
-    print(users) 
 
 def create_user(id,nombre,edad,genero,tel):
     db = conection() # Hacemos la conexión
@@ -31,7 +29,7 @@ def create_user(id,nombre,edad,genero,tel):
 def edit_user(id,nombre,edad,genero,tel):
     db = conection() # Hacemos la conexión
     with db.cursor() as cursor:
-        cursor.execute("UPDATE usuarios set  name = %s,edad = %s, genero = %s, tel = %s WHERE id = %s;",(nombre,edad,genero,tel,id)) # editamos
+        cursor.execute("UPDATE usuarios set  nombre = %s,edad = %s, genero = %s, tel = %s WHERE id = %s;",(nombre,edad,genero,tel,id)) # editamos
     db.commit() # hacemos el commit
     db.close() # cerramos
 
@@ -42,8 +40,3 @@ def delete_user(id):
     db.commit() # hacemos el commit
     db.close() # cerramos
 
-
-#delete_user(5)
-#get_users()
-#create_user(5,'benjamin',20,'Masculino',123213)
-#get_users()
