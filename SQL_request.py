@@ -1,7 +1,6 @@
 import json
 #import pymysql
 import pymysql 
-
 def conection():
     return pymysql.connect(host='localhost',
                             user='root',
@@ -12,11 +11,18 @@ def conection():
 def get_users():
     db = conection() # Hacemos la conexión
     users = [] # acá se almacena el resultado
+    list_users = []
     with db.cursor() as cursor: # 
         cursor.execute('SELECT * FROM usuarios;') # hacemos el request
         users = cursor.fetchall() # retorna un objeto
+        print(users)
     db.close()
-    return users
+    for user in users:
+        nueva_lista = list(user)
+        dic = {'id':nueva_lista[0],'nombre':nueva_lista[1],'edad':nueva_lista[2],'genero':nueva_lista[3],'tel':nueva_lista[4]}
+        list_users.append(dic)
+    print(list_users)
+    return list_users
 
 def create_user(id,nombre,edad,genero,tel):
     db = conection() # Hacemos la conexión

@@ -1,15 +1,20 @@
+
+from flask_cors import CORS, cross_origin
+
 from flask import Flask, request, redirect, jsonify
+
+
 import json
 from SQL_request import create_user,get_users,delete_user,edit_user
 
 app=Flask(__name__)
-
+CORS(app)
 
 @app.route("/", methods=["POST"])
 def prueba():
     return jsonify({"mensaje":"hola"})
 
-
+@cross_origin
 @app.route("/insert", methods=["POST"])
 def insertar():
     info = json.loads(request.data)
@@ -17,10 +22,10 @@ def insertar():
     return info
 
 
-
+@cross_origin
 @app.route("/select", methods=["GET"])
 def obtener():
-    return json.dumps(get_users())
+    return jsonify(get_users())
 
 
 @app.route("/delete", methods=["DELETE"])

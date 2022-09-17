@@ -1,6 +1,7 @@
 import json
 import pymysql
 from flask import Flask, request, redirect
+from flask_cors import CORS
 
 app = Flask(__name__)
 
